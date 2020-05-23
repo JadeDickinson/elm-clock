@@ -258,9 +258,7 @@ getOClock timeZone timeNow =
 
 wordIsHighlighted : String -> Model -> String
 wordIsHighlighted word model =
-  if String.contains word (getHour model.zone model.time) then
-    "highlighted"
-  else if String.contains word (getModifier model.zone model.time) then
+  if String.contains word (getModifier model.zone model.time) then
     "highlighted"
   else
     ""
@@ -324,25 +322,25 @@ view model =
       , div [] [
         span [class (wordIsHighlighted "PAST" model)] [text "PAST"]
         , span [] [text "ERU"]
-        , span [class (wordIsHighlighted "NINE" model)] [text "NINE"]
+        , span [class (checkHourHighlighted "NINE" model)] [text "NINE"]
       ]
       , div [] [
-        span [class (wordIsHighlighted "ONE" model)] [text "ONE"]
-        , span [class (wordIsHighlighted "SIX" model)] [text "SIX"]
-        , span [class (wordIsHighlighted "THREE" model)] [text "THREE"]
+        span [class (checkHourHighlighted "ONE" model)] [text "ONE"]
+        , span [class (checkHourHighlighted "SIX" model)] [text "SIX"]
+        , span [class (checkHourHighlighted "THREE" model)] [text "THREE"]
       ]
       , div [] [
-        span [class (wordIsHighlighted "FOUR" model)] [text "FOUR"]
+        span [class (checkHourHighlighted "FOUR" model)] [text "FOUR"]
         , span [class (checkHourHighlighted "FIVE" model)] [text "FIVE"]
-        , span [class (wordIsHighlighted "TWO" model)] [text "TWO"]
+        , span [class (checkHourHighlighted "TWO" model)] [text "TWO"]
       ]
       , div [] [
-        span [class (wordIsHighlighted "EIGHT" model)] [text "EIGHT"]
-        , span [class (wordIsHighlighted "ELEVEN" model)] [text "ELEVEN"]
+        span [class (checkHourHighlighted "EIGHT" model)] [text "EIGHT"]
+        , span [class (checkHourHighlighted "ELEVEN" model)] [text "ELEVEN"]
       ]
       , div [] [
-        span [class (wordIsHighlighted "SEVEN" model)] [text "SEVEN"]
-        , span [class (wordIsHighlighted "TWELVE" model)] [text "TWELVE"]
+        span [class (checkHourHighlighted "SEVEN" model)] [text "SEVEN"]
+        , span [class (checkHourHighlighted "TWELVE" model)] [text "TWELVE"]
       ]
       , div [] [
         span [class (checkHourHighlighted "TEN" model)] [text "TEN"]
