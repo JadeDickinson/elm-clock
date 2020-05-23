@@ -165,13 +165,6 @@ checkModifierHighlighted word model =
   else
     ""
 
-checkOClockHighlighted : Model -> String
-checkOClockHighlighted model = 
-  if String.contains "O CLOCK" (getOClock model.zone model.time) then
-    "highlighted"
-  else
-    ""
-
 checkHourHighlighted : String -> Model -> String
 checkHourHighlighted word model = 
   if String.contains word (getHour model.zone model.time) then
@@ -247,7 +240,7 @@ view model =
       , div [] [
         span [class (checkHourHighlighted "TEN" model)] [text "TEN"]
         , span [] [text "SE"]
-        , span [class (checkOClockHighlighted model)] [text "OCLOCK"]
+        , span [class (checkModifierHighlighted "OCLOCK" model)] [text "OCLOCK"]
       ]
     ]
     ]
