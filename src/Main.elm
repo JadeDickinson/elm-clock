@@ -3,6 +3,7 @@ module Main exposing (..)
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import NumberToWords
 import Task
 import Time
 
@@ -96,55 +97,7 @@ getModifier timeZone timeNow =
 
 getHour : Time.Zone -> Time.Posix -> String
 getHour timeZone timeNow = 
-  case String.fromInt (Time.toHour timeZone timeNow) of
-  "1" ->
-    "ONE"
-  "2" ->
-    "TWO"
-  "3" ->
-    "THREE"
-  "4" ->
-    "FOUR"
-  "5" ->
-    "FIVE"
-  "6" ->
-    "SIX"
-  "7" ->
-    "SEVEN"
-  "8" ->
-    "EIGHT"
-  "9" ->
-    "NINE"
-  "10" ->
-    "TEN"
-  "11" ->
-    "ELEVEN"
-  "12" ->
-    "TWELVE"
-  "13" ->
-    "ONE"
-  "14" ->
-    "TWO"
-  "15" ->
-    "THREE"
-  "16" ->
-    "FOUR"
-  "17" ->
-    "FIVE"
-  "18" ->
-    "SIX"
-  "19" ->
-    "SEVEN"
-  "20" ->
-    "EIGHT"
-  "21" ->
-    "NINE"
-  "22" ->
-    "TEN"
-  "23" ->
-    "ELEVEN"
-  _ ->
-    ""
+  String.toUpper (NumberToWords.intToWords (modBy 12 (Time.toHour timeZone timeNow)))
 
 getOClock : Time.Zone -> Time.Posix -> String
 getOClock timeZone timeNow = 
