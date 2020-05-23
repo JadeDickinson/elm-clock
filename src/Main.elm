@@ -148,19 +148,14 @@ getHour timeZone timeNow =
 
 getOClock : Time.Zone -> Time.Posix -> String
 getOClock timeZone timeNow = 
-  case Time.toMinute timeZone timeNow of
-  0 ->
-    " O CLOCK"
-  1 ->
-    " O CLOCK"
-  2 ->
-    " O CLOCK"
-  3 ->
-    " O CLOCK"
-  4 ->
-    " O CLOCK"
-  _ ->
-    ""
+  let
+    minutes =
+      Time.toMinute timeZone timeNow
+  in
+    if minutes >= 0 && minutes <=4 then
+      "OCLOCK"
+    else
+      ""
 -- SUBSCRIPTIONS
 
 checkModifierHighlighted : String -> Model -> String
