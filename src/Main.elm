@@ -256,8 +256,8 @@ getOClock timeZone timeNow =
     ""
 -- SUBSCRIPTIONS
 
-wordIsHighlighted : String -> Model -> String
-wordIsHighlighted word model =
+checkModifierHighlighted : String -> Model -> String
+checkModifierHighlighted word model =
   if String.contains word (getModifier model.zone model.time) then
     "highlighted"
   else
@@ -304,23 +304,23 @@ view model =
       , div [] [
         span [] [text "A"]
         , span [] [text "C"]
-        , span [class (wordIsHighlighted "QUARTER" model)] [text "QUARTER"]
+        , span [class (checkModifierHighlighted "QUARTER" model)] [text "QUARTER"]
         , span [] [text "DC"]
       ]
       , div [] [
-        span [class (wordIsHighlighted "TWENTY" model)] [text "TWENTY"]
-        , span [class (wordIsHighlighted "FIVE " model)] [text "FIVE"]
+        span [class (checkModifierHighlighted "TWENTY" model)] [text "TWENTY"]
+        , span [class (checkModifierHighlighted "FIVE " model)] [text "FIVE"]
         , span [] [text "A"]
       ]
       , div [] [
-        span [class (wordIsHighlighted "HALF" model)] [text "HALF"]
+        span [class (checkModifierHighlighted "HALF" model)] [text "HALF"]
         , span [] [text "S"]
-        , span [class (wordIsHighlighted "TEN " model)] [text "TEN"]
+        , span [class (checkModifierHighlighted "TEN " model)] [text "TEN"]
         , span [] [text "F"]
-        , span [class (wordIsHighlighted "TO" model)] [text "TO"]
+        , span [class (checkModifierHighlighted "TO" model)] [text "TO"]
       ]
       , div [] [
-        span [class (wordIsHighlighted "PAST" model)] [text "PAST"]
+        span [class (checkModifierHighlighted "PAST" model)] [text "PAST"]
         , span [] [text "ERU"]
         , span [class (checkHourHighlighted "NINE" model)] [text "NINE"]
       ]
