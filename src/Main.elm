@@ -63,128 +63,35 @@ update msg model =
 
 getModifier : Time.Zone -> Time.Posix -> String
 getModifier timeZone timeNow = 
-  case Time.toMinute timeZone timeNow of
-  0 ->
+  let
+    minutes =
+      Time.toMinute timeZone timeNow
+  in
+  if minutes >= 0 && minutes <= 4 then
     ""
-  1 ->
-    ""
-  2 ->
-    ""
-  3 ->
-    ""
-  4 ->
-    ""
-  5 ->
-    "FIVE PAST "
-  6 ->
-    "FIVE PAST "
-  7 ->
-    "FIVE PAST "
-  8 ->
-    "FIVE PAST "
-  9 ->
-    "FIVE PAST "
-  10 ->
-    "TEN PAST "
-  11 ->
-    "TEN PAST "
-  12 ->
-    "TEN PAST "
-  13 ->
-    "TEN PAST "
-  14 ->
-    "TEN PAST "
-  15 ->
-    "QUARTER PAST "
-  16 ->
-    "QUARTER PAST "
-  17 ->
-    "QUARTER PAST "
-  18 ->
-    "QUARTER PAST "
-  19 ->
-    "QUARTER PAST "
-  20 ->
-    "TWENTY PAST "
-  21 ->
-    "TWENTY PAST "
-  22 ->
-    "TWENTY PAST "
-  23 ->
-    "TWENTY PAST "
-  24 ->
-    "TWENTY PAST "
-  25 ->
-    "TWENTY FIVE PAST "
-  26 ->
-    "TWENTY FIVE PAST "
-  27 ->
-    "TWENTY FIVE PAST "
-  28 ->
-    "TWENTY FIVE PAST "
-  29 ->
-    "TWENTY FIVE PAST "
-  30 ->
-    "HALF PAST "
-  31 ->
-    "HALF PAST "
-  32 ->
-    "HALF PAST "
-  33 ->
-    "HALF PAST "
-  34 ->
-    "HALF PAST "
-  35 ->
-    "TWENTY FIVE TO "
-  36 ->
-    "TWENTY FIVE TO "
-  37 ->
-    "TWENTY FIVE TO "
-  38 ->
-    "TWENTY FIVE TO "
-  39 ->
-    "TWENTY FIVE TO "
-  40 ->
-    "TWENTY TO "
-  41 ->
-    "TWENTY TO "
-  42 ->
-    "TWENTY TO "
-  43 ->
-    "TWENTY TO "
-  44 ->
-    "TWENTY TO "
-  45 ->
-    "QUARTER TO "
-  46 ->
-    "QUARTER TO "
-  47 ->
-    "QUARTER TO "
-  48 ->
-    "QUARTER TO "
-  49 ->
-    "QUARTER TO "
-  50 ->
-    "TEN TO "
-  51 ->
-    "TEN TO "
-  52 ->
-    "TEN TO "
-  53 ->
-    "TEN TO "
-  54 ->
-    "TEN TO "
-  55 ->
-    "FIVE TO "
-  56 ->
-    "FIVE TO "
-  57 ->
-    "FIVE TO "
-  58 ->
-    "FIVE TO "
-  59 ->
-    "FIVE TO "
-  _ ->
+  else if minutes >= 5 && minutes <= 9 then
+    "FIVE PAST"
+  else if minutes >= 10 && minutes <= 14 then
+    "TEN PAST"
+  else if minutes >= 15 && minutes <= 19 then
+    "QUARTER PAST"
+  else if minutes >= 20 && minutes <= 24 then
+    "TWENTY PAST"
+  else if minutes >= 25 && minutes <= 29 then
+    "TWENTY FIVE PAST"
+  else if minutes >= 30 && minutes <= 34 then
+    "HALF PAST"
+  else if minutes >= 35 && minutes <= 39 then
+    "TWENTY FIVE TO"
+  else if minutes >= 40 && minutes <= 44 then
+    "TWENTY TO"
+  else if minutes >= 45 && minutes <= 49 then
+    "QUARTER TO"
+  else if minutes >= 50 && minutes <= 54 then
+    "TEN TO"
+  else if minutes >= 55 && minutes <= 59 then
+    "FIVE TO"
+  else
     ""
 
 getHour : Time.Zone -> Time.Posix -> String
