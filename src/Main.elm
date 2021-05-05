@@ -122,7 +122,7 @@ getOClock timeZone timeNow =
             Time.toMinute timeZone timeNow
     in
     if minutes >= 0 && minutes <= 4 then
-        "OCLOCK"
+        ""
 
     else
         ""
@@ -150,6 +150,10 @@ checkHourHighlighted word model =
         ""
 
 
+
+-- "QUARTER"
+
+
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Time.every 1000 Tick
@@ -157,6 +161,26 @@ subscriptions model =
 
 
 -- VIEW
+
+
+manualCss =
+    Html.node "style"
+        []
+        [ Html.text <|
+            """
+            body,
+            html {
+            font-family: "DIN Alternate";
+            color: #e2dbd8;
+            background-color: red;
+            letter-spacing: 11px;
+            }
+
+            .highlighted {
+            color: black;
+            }
+            """
+        ]
 
 
 view : Model -> Html Msg
@@ -170,62 +194,148 @@ view model =
 
         second =
             String.fromInt (Time.toSecond model.zone model.time)
+
+        lang =
+            Spanish
     in
     div []
-        [ h1 [ class "highlighted" ] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
+        [ manualCss
+        , h1 [ class "highlighted" ] [ text (hour ++ ":" ++ minute ++ ":" ++ second) ]
         , div []
             [ div []
-                [ span [ class "highlighted" ] [ text "IT" ]
+                [ span [ class "highlighted" ] [ text (translate lang "IT") ]
                 , span [] [ text "L" ]
-                , span [ class "highlighted" ] [ text "IS" ]
+                , span [ class "highlighted" ] [ text (translate lang "IS") ]
                 , span [] [ text "A" ]
                 , span [] [ text "SAMPM" ]
                 ]
             , div []
                 [ span [] [ text "A" ]
                 , span [] [ text "C" ]
-                , span [ class (checkModifierHighlighted "QUARTER" model) ] [ text "QUARTER" ]
+                , span [ class (checkModifierHighlighted (translate lang "QUARTER") model) ] [ text (translate lang "QUARTER") ]
                 , span [] [ text "DC" ]
                 ]
             , div []
-                [ span [ class (checkModifierHighlighted "TWENTY" model) ] [ text "TWENTY" ]
-                , span [ class (checkModifierHighlighted "FIVE " model) ] [ text "FIVE" ]
+                [ span [ class (checkModifierHighlighted (translate lang "TWENTY") model) ] [ text (translate lang "TWENTY") ]
+                , span [ class (checkModifierHighlighted (translate lang "FIVE ") model) ] [ text (translate lang "FIVE") ]
                 , span [] [ text "A" ]
                 ]
             , div []
-                [ span [ class (checkModifierHighlighted "HALF" model) ] [ text "HALF" ]
+                [ span [ class (checkModifierHighlighted (translate lang "HALF") model) ] [ text (translate lang "HALF") ]
                 , span [] [ text "S" ]
-                , span [ class (checkModifierHighlighted "TEN " model) ] [ text "TEN" ]
+                , span [ class (checkModifierHighlighted (translate lang "TEN ") model) ] [ text (translate lang "TEN") ]
                 , span [] [ text "F" ]
-                , span [ class (checkModifierHighlighted "TO" model) ] [ text "TO" ]
+                , span [ class (checkModifierHighlighted (translate lang "TO") model) ] [ text (translate lang "TO") ]
                 ]
             , div []
-                [ span [ class (checkModifierHighlighted "PAST" model) ] [ text "PAST" ]
+                [ span [ class (checkModifierHighlighted (translate lang "PAST") model) ] [ text (translate lang "PAST") ]
                 , span [] [ text "ERU" ]
-                , span [ class (checkHourHighlighted "NINE" model) ] [ text "NINE" ]
+                , span [ class (checkHourHighlighted (translate lang "NINE") model) ] [ text (translate lang "NINE") ]
                 ]
             , div []
-                [ span [ class (checkHourHighlighted "ONE" model) ] [ text "ONE" ]
-                , span [ class (checkHourHighlighted "SIX" model) ] [ text "SIX" ]
-                , span [ class (checkHourHighlighted "THREE" model) ] [ text "THREE" ]
+                [ span [ class (checkHourHighlighted (translate lang "ONE") model) ] [ text (translate lang "ONE") ]
+                , span [ class (checkHourHighlighted (translate lang "SIX") model) ] [ text (translate lang "SIX") ]
+                , span [ class (checkHourHighlighted (translate lang "THREE") model) ] [ text (translate lang "THREE") ]
                 ]
             , div []
-                [ span [ class (checkHourHighlighted "FOUR" model) ] [ text "FOUR" ]
-                , span [ class (checkHourHighlighted "FIVE" model) ] [ text "FIVE" ]
-                , span [ class (checkHourHighlighted "TWO" model) ] [ text "TWO" ]
+                [ span [ class (checkHourHighlighted (translate lang "FOUR") model) ] [ text (translate lang "FOUR") ]
+                , span [ class (checkHourHighlighted (translate lang "FIVE") model) ] [ text (translate lang "FIVE") ]
+                , span [ class (checkHourHighlighted (translate lang "TWO") model) ] [ text (translate lang "TWO") ]
                 ]
             , div []
-                [ span [ class (checkHourHighlighted "EIGHT" model) ] [ text "EIGHT" ]
-                , span [ class (checkHourHighlighted "ELEVEN" model) ] [ text "ELEVEN" ]
+                [ span [ class (checkHourHighlighted (translate lang "EIGHT") model) ] [ text (translate lang "EIGHT") ]
+                , span [ class (checkHourHighlighted (translate lang "ELEVEN") model) ] [ text (translate lang "ELEVEN") ]
                 ]
             , div []
-                [ span [ class (checkHourHighlighted "SEVEN" model) ] [ text "SEVEN" ]
-                , span [ class (checkHourHighlighted "TWELVE" model) ] [ text "TWELVE" ]
+                [ span [ class (checkHourHighlighted (translate lang "SEVEN") model) ] [ text (translate lang "SEVEN") ]
+                , span [ class (checkHourHighlighted (translate lang "TWELVE") model) ] [ text (translate lang "TWELVE") ]
                 ]
             , div []
-                [ span [ class (checkHourHighlighted "TEN" model) ] [ text "TEN" ]
+                [ span [ class (checkHourHighlighted (translate lang "TEN") model) ] [ text (translate lang "TEN") ]
                 , span [] [ text "SE" ]
-                , span [ class (checkModifierHighlighted "OCLOCK" model) ] [ text "OCLOCK" ]
+                , span [ class (checkModifierHighlighted (translate lang "OCLOCK") model) ] [ text (translate lang "OCLOCK") ]
                 ]
             ]
         ]
+
+
+type Language
+    = English
+    | Spanish
+
+
+translate : Language -> String -> String
+translate language string =
+    case language of
+        Spanish ->
+            toSpanish string
+
+        English ->
+            string
+
+
+toSpanish : String -> String
+toSpanish s =
+    case s of
+        "IT" ->
+            "SON"
+
+        "IS" ->
+            "LAS"
+
+        "QUARTER" ->
+            "QUARTER"
+
+        "HALF" ->
+            "HALF"
+
+        "TO" ->
+            "TO"
+
+        "PAST" ->
+            "PAST"
+
+        "OCLOCK" ->
+            "ENPUNTO"
+
+        "ONE" ->
+            "UNO"
+
+        "TWO" ->
+            "DOS"
+
+        "THREE" ->
+            "TRES"
+
+        "FOUR" ->
+            "QUATRO"
+
+        "FIVE" ->
+            "CINCO"
+
+        "SIX" ->
+            "SEIS"
+
+        "SEVEN" ->
+            "SIETE"
+
+        "EIGHT" ->
+            "OCHO"
+
+        "NINE" ->
+            "NUEVE"
+
+        "TEN" ->
+            "DIEZ"
+
+        "ELEVEN" -> "ONCE"
+
+        "TWELVE" -> "DOCE"
+
+        "TWENTY" ->
+            "VEINTI"
+
+        "HALF PAST" -> "MEDIA"
+
+        _ ->
+            "UNKNOWN:" ++ s
