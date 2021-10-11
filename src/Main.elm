@@ -220,7 +220,7 @@ view model =
                 ]
             , div []
                 [ span [ class (checkHourHighlighted "SEVEN" model) ] [ text "SEVEN" ]
-                , span [ class (checkHourHighlighted "TWELVE" model) ] [ text "TWELVE" ]
+                , span [ class (checkHourHighlighted "ZERO" model) ] [ text "TWELVE" ]
                 ]
             , div []
                 [ span [ class (checkHourHighlighted "TEN" model) ] [ text "TEN" ]
